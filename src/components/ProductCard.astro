@@ -1,0 +1,36 @@
+---
+
+import type { Product } from '../types/product.ts';
+
+interface Props {
+  product: Product;
+  addToCart: (productId: string) => void;
+}
+
+export const ProductCard = ({ product, addToCart }: Props) => {
+---
+<div class="product-card">
+  <img src={product.image.url} alt={product.title} />
+  <h3>{product.title}</h3>
+  <p>{product.price}</p>
+  <button onclick="addToCart(product.productId)">Add to Cart</button>
+</div>
+}
+
+//onClick={() => addToCart(product.productId)}
+
+<style>
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 16px;
+    width: 200px;
+  }
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+

@@ -1,0 +1,42 @@
+---
+import type { Product } from '../types/product.ts';
+
+interface Props {
+  product: Product;
+  onClose: () => void;
+}
+
+export const ProductInfo = ({ product, onClose }: Props) => {
+---
+<div class="product-info">
+  <button class="close-btn" onclick="onClose()">X</button>
+  <img src={product.image.url} alt={product.title} />
+  <h2>{product.title}</h2>
+  <p>{product.price} USD</p>
+  <button onclick="addToCart(product.productId)">Add to Cart</button>
+</div>
+
+}
+
+<style>
+  .product-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+</style>

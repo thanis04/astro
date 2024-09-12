@@ -1,0 +1,44 @@
+---
+
+import { getProducts } from '../api/products.ts';
+import { ProductCard } from '../components/ProductCard.astro';
+import { ProductInfo } from '../components/ProductInfo.astro';
+import { addToCart, removeFromCart } from '../api/cart.ts';
+import type { Product } from '../types.d.ts';
+
+const products = await getProducts();
+let selectedProduct = null;
+
+const handleProductClick = (product: Product) => {
+  selectedProduct = product;
+};
+
+const handleCloseProductInfo = () => {
+  selectedProduct = null;   
+};
+---
+
+<section class="catalog">
+  {products.map((product: Product) => (
+    <ProductCard 
+      product={product} 
+      addToCart={addToCart} 
+    />
+  ))}
+</section>
+
+{selectedProduct && (
+  <ProductInfo 
+    product={selectedProduct} 
+    onClose={handleCloseProductInfo} 
+  />
+)}
+
+<style>
+  .catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+</style>
